@@ -4,6 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import {ToggleButton, ToggleButtonGroup} from "@mui/material";
+import Chart from "./Chart";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -36,6 +38,12 @@ const Dashboard = () => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    }
+
+    const [alignment, setAlignment] = React.useState('web');
+
+    const handleChange1 = (event, newAlignment) => {
+        setAlignment(newAlignment);
     };
     return (
         <Box sx={{ width: '100%' }}>
@@ -46,7 +54,19 @@ const Dashboard = () => {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                Item One
+                <ToggleButtonGroup
+                    color="primary"
+                    value={alignment}
+                    exclusive
+                    onChange={handleChange1}
+                >
+                    <ToggleButton value="one_min">1 Minute</ToggleButton>
+                    <ToggleButton value="five_min">5 Minutes</ToggleButton>
+                    <ToggleButton value="one_hour">1 Hour</ToggleButton>
+                    <ToggleButton value="one_week">1 Week</ToggleButton>
+                </ToggleButtonGroup>
+                <br/> <br/>
+                <Chart />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two

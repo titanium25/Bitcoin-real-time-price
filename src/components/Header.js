@@ -57,7 +57,7 @@ const Header = () => {
                                 }).format(data.last)}
                             </Typography>
                             <div className="in-row-2">
-                                <span className="start">{data.change.toFixed(2) || '...loading'}</span>
+                                <span className="start">{data.change || '...loading'}</span>
                                 <span className="end">({data.percentChange || '...loading'}%)</span>
                             </div>
                         </div>
