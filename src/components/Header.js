@@ -13,7 +13,7 @@ const Header = () => {
 
     useEffect(() => {
         const subs = {"type": "SUBSCRIBE", "instruments": ["cc-btc-usd-cccagg"]}
-        const ws = new WebSocket('ws://wstest.fxempire.com?token=btctothemoon');
+        const ws = new WebSocket('wss://wstest.fxempire.com?token=btctothemoon');
         ws.onopen = () => ws.send(JSON.stringify(subs))
         ws.onclose = () => console.log('ws closed');
         ws.onmessage = e => {
