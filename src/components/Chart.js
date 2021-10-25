@@ -9,12 +9,16 @@ const Chart = () => {
 
     const [chart, setChart] = useState([]);
     const [arr, setArr] = useState([]);
+    const [time, setTime] = useState([]);
 
 
 
     useEffect(async () => {
         const response = await BitCoinDAL.getAll();
-        response.data.data.map(v => arr.push([v.Date, v.High]))
+        response.data.data.map(v => {
+            arr.push(v.High)
+            time.push(v.Date)
+        })
         setChart(response.data.data)
     }, []);
 
@@ -28,7 +32,26 @@ const Chart = () => {
         title: {
             text: 'Bitcoin Price Chart'
         },
+        xAxis: {
+            type: 'datetime',
+            startOnTick: true,
+            // showFirstLabel: true,
+            endOnTick: true,
+            // showLastLabel: true,
+            categories: time,
+            tickInterval: 1,
+            labels: {
+                rotation: 20,
+                align: 'left',
+                step: 5,
+                enabled: true,
+                overflow: 'justify',
 
+            }
+        },
+        legend: {
+            enabled: false
+        },
         series: [{
             name: 'Bitcoin Price in USD',
             data: arr,
