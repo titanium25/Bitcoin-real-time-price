@@ -3,24 +3,8 @@ import BitCoinDAL from "../adapters/BitCoinDAL";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
+const Chart = (props) => {
 
-
-const Chart = () => {
-
-    const [chart, setChart] = useState([]);
-    const [arr, setArr] = useState([]);
-    const [time, setTime] = useState([]);
-
-
-
-    useEffect(async () => {
-        const response = await BitCoinDAL.getAll();
-        response.data.data.map(v => {
-            arr.push(v.High)
-            time.push(v.Date)
-        })
-        setChart(response.data.data)
-    }, []);
 
 
     const options = {
@@ -38,7 +22,7 @@ const Chart = () => {
             // showFirstLabel: true,
             endOnTick: true,
             // showLastLabel: true,
-            categories: time,
+            categories: props.time,
             tickInterval: 1,
             labels: {
                 rotation: 20,
@@ -54,7 +38,7 @@ const Chart = () => {
         },
         series: [{
             name: 'Bitcoin Price in USD',
-            data: arr,
+            data: props.arr,
             type: 'area',
             threshold: null,
             tooltip: {
