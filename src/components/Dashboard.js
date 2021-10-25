@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -20,7 +20,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    <Typography component={'span'}>{children}</Typography>
                 </Box>
             )}
         </div>
@@ -34,17 +34,17 @@ TabPanel.propTypes = {
 };
 
 const Dashboard = () => {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [alignment, setAlignment] = useState('one_min');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
 
-    const [alignment, setAlignment] = React.useState('web');
-
-    const handleChange1 = (event, newAlignment) => {
+    const toggleButtonGroupHandler = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
+
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -58,7 +58,7 @@ const Dashboard = () => {
                     color="primary"
                     value={alignment}
                     exclusive
-                    onChange={handleChange1}
+                    onChange={toggleButtonGroupHandler}
                 >
                     <ToggleButton value="one_min">1 Minute</ToggleButton>
                     <ToggleButton value="five_min">5 Minutes</ToggleButton>
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 <Chart />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                Table
             </TabPanel>
         </Box>
     );

@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import {Typography} from "@mui/material";
-import Moment from 'react-moment';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import moment from 'moment/moment.js'
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const Header = () => {
@@ -36,31 +36,43 @@ const Header = () => {
             >
                 <Paper elevation={5}>
                     <div className="wrapper">
-                        <div className="aside-1">
-                            <div className="in-row-1">
-                            <img src={require('../img/btc.png').default} alt="btc logo"/>
-                            <Typography variant="h6" gutterBottom component="div">
-                                Bitcoin
-                            </Typography>
+                        <div>
+                            <div className="logo">
+                                <img src={require('../img/btc.png').default} alt="btc logo"/>
+                                &#xA0; Bitcoin
                             </div>
-                            As of: <Moment withTitle>{data.lastUpdate || '...loading'}</Moment>
+                            <div className="date-time">
+                                As of:
+                                {
+                                    moment(data.lastUpdate)
+                                        .format(' MMM DD, YYYY HH:mm UTC')
+                                    || '...loading'
+                                }
 
-                        </div>
-                        <div className="aside-2">
-                            <Typography variant="h5" gutterBottom component="div">
-                                <ArrowDropUpIcon className="curr-up-icon"/>
-                                {new Intl.NumberFormat("en-GB", {
-                                    style: "currency",
-                                    currency: "USD",
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                }).format(data.last)}
-                            </Typography>
-                            <div className="in-row-2">
-                                <span className="start">{data.change || '...loading'}</span>
-                                <span className="end">({data.percentChange || '...loading'}%)</span>
                             </div>
                         </div>
+                        {
+                            isNaN(data.last) ? <CircularProgress/> :
+                                <div>
+                                    <div className="price">
+                                        <ArrowDropUpIcon className="curr-up-icon"/> &#xA0;
+                                        {
+                                            new Intl.NumberFormat("en-IN",
+                                                {
+                                                    style: "currency",
+                                                    currency: "USD",
+                                                    minimumFractionDigits: 2,
+                                                    maximumFractionDigits: 2
+                                                })
+                                                .format(data.last)
+                                        }
+                                    </div>
+                                    <div className="delta">
+                                        <span>+{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
+                                        <span>(+{data.percentChange}%)</span>
+                                    </div>
+                                </div>
+                        }
                     </div>
                 </Paper>
 

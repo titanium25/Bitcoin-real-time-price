@@ -12,35 +12,40 @@ body {
 .wrapper {
     display: flex;
     flex-flow: row wrap;
-    text-align: left;
     justify-content: space-between;
-    align-items: center;
-
 }
 
-.aside-1 {
-    flex-flow: row;
+.logo {
+    display: flex;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: Arial, sans-serif ;
 }
 
-.aside-2 {
-    text-align: center;
+.date-time {
+    padding-top: .5rem;
+    font-weight: revert;
+    color: darkgrey;
+    font-size: 12px;
+}
+
+.price {
+    display: flex;
+    font-weight: bold;
+    font-size: 28px;
+    font-family: Roboto, sans-serif ;
+}
+
+.delta {
+    display: flex;
+    justify-content: space-between;
+    color: #4a8a4a;
+    font-size: 20px;
+    font-family: Roboto, sans-serif ;
 }
 
 .curr-up-icon {
-    font-size: 1.25rem;
-    color: green;
-}
-
-.in-row-1 {
-    display: flex;
-    justify-content: flex-start;
-    height: 2rem;
-    font-weight: bold;
-
-}
-
-.in-row-2 {
-
-    display: flex;
-    justify-content: space-evenly;
+    transform: scale(2);
+    margin-top: 6px;
+    color: #4a8a4a;
 }

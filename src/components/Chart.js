@@ -3,7 +3,7 @@ import BitCoinDAL from "../adapters/BitCoinDAL";
 
 const Chart = () => {
 
-    const [chart, setChart] = useState({});
+    const [chart, setChart] = useState([]);
 
     useEffect(async () => {
         const response = await BitCoinDAL.getAll();
