@@ -7,13 +7,14 @@ const Chart = () => {
 
     useEffect(async () => {
         const response = await BitCoinDAL.getAll();
-        setChart(response.data)
-        console.log(chart)
+        setChart(response.data.data)
     }, [])
 
     return (
         <div>
-            Chart
+            {chart.map((v,i) => {
+                return (<div key={i}>{v.Date}</div>)
+            })}
         </div>
     );
 };
