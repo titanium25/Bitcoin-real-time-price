@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import {ToggleButton, ToggleButtonGroup} from "@mui/material";
 import Chart from "./Chart";
 import BitCoinDAL from "../adapters/BitCoinDAL";
+import Table from "./Table";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -99,7 +100,7 @@ const Dashboard = () => {
                 <Chart arr={arr} time={time} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Table
+                <Table data={chart} />
             </TabPanel>
         </Box>
     );
