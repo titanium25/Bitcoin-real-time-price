@@ -25,9 +25,9 @@ const Header = () => {
 
     const arrow = (num) => {
         return num > 0 ?
-            <ArrowDropUpIcon className="curr-up-icon"/>
+            <><ArrowDropUpIcon style={{ color: 'green' }} className="curr-up-icon"/> &#xA0;</>
             :
-            <ArrowDropDownIcon className="curr-up-icon"/>
+            <><ArrowDropDownIcon style={{ color: 'red' }} className="curr-up-icon"/> &#xA0;</>
     }
 
 
@@ -35,15 +35,15 @@ const Header = () => {
         if (num > 0) {
             return (
                 <>
-                    <span>+{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
-                    <span>(+{data.percentChange}%)</span>
+                    <span style={{ color: 'green' }}>+{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
+                    <span style={{ color: 'green' }}>(+{data.percentChange}%)</span>
                 </>
             )
         } else {
             return (
                 <>
-                    <span>{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
-                    <span>({data.percentChange}%)</span>
+                    <span style={{ color: 'red' }}>{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
+                    <span style={{ color: 'red' }}>({data.percentChange}%)</span>
                 </>
             )
         }

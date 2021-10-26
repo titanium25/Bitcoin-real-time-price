@@ -39,7 +39,6 @@ body {
 .delta {
     display: flex;
     justify-content: space-between;
-    color: #4a8a4a;
     font-size: 20px;
     font-family: Roboto, sans-serif ;
 }
