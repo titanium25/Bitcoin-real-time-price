@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import moment from 'moment/moment.js'
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -21,6 +22,32 @@ const Header = () => {
             setData(message[Object.keys(message)[0]])
         }
     }, [])
+
+    const arrow = (num) => {
+        return num > 0 ?
+            <ArrowDropUpIcon className="curr-up-icon"/>
+            :
+            <ArrowDropDownIcon className="curr-up-icon"/>
+    }
+
+
+    const delta = (num) => {
+        if (num > 0) {
+            return (
+                <>
+                    <span>+{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
+                    <span>(+{data.percentChange}%)</span>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <span>{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
+                    <span>({data.percentChange}%)</span>
+                </>
+            )
+        }
+    }
 
     return (
         <div>
@@ -55,7 +82,9 @@ const Header = () => {
                             isNaN(data.last) ? <CircularProgress/> :
                                 <div>
                                     <div className="price">
-                                        <ArrowDropUpIcon className="curr-up-icon"/> &#xA0;
+
+                                        {arrow(data.change)}
+
                                         {
                                             new Intl.NumberFormat("en-IN",
                                                 {
@@ -66,10 +95,10 @@ const Header = () => {
                                                 })
                                                 .format(data.last)
                                         }
+
                                     </div>
                                     <div className="delta">
-                                        <span>+{Math.round((data.change + Number.EPSILON) * 100) / 100}</span>
-                                        <span>(+{data.percentChange}%)</span>
+                                        {delta(data.change)}
                                     </div>
                                 </div>
                         }
